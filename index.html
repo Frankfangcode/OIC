@@ -1,0 +1,297 @@
+    <!DOCTYPE html>
+    <html lang="zh-Hant">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OIC Instagram 貼文預覽 (官方 CI 版 - 4:5 比例)</title>
+        <!-- 載入 Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+        <!-- 載入 Lucide Icons (從 head 移除) -->
+        <!-- 載入 Google Fonts (Playfair Display + Inter) --><link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        
+        <style>
+            /* 統一使用 Inter 字體 */
+            body {
+                font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            }
+            /* 襯線體 (標題用) */
+            .font-serif {
+                font-family: "Playfair Display", Georgia, serif;
+            }
+            /* 隱藏滾動條 */
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        </style>
+        <script>
+            // 自訂 Tailwind 顏色 (還原為官方 CI)
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'oic-blue': '#23417D', // 官方政大藍
+                            'oic-red': '#BF3E34',  // 官方磚紅
+                            'base-bg': '#FFFFFF',  // 改回純白
+                            'dark-text': '#1F2937', // 標準灰-800
+                            'ig-light-bg': '#FFFFFF',
+                            'ig-light-secondary': '#737373',
+                            'ig-light-border': '#DBDBDB',
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="bg-gray-200 text-dark-text p-4 md:p-8 flex justify-center items-center min-h-screen">
+
+        <!-- 模擬手機螢幕的容器 (改為淺色模式) --><div class="w-full max-w-sm overflow-hidden rounded-xl border border-ig-light-border bg-ig-light-bg shadow-2xl">
+            
+            <!-- 1. Instagram 貼文頂部 (Header) --><header class="flex items-center justify-between p-3 border-b border-ig-light-border">
+                <div class="flex items-center space-x-3">
+                    <!-- OIC Logo -->
+                    <img src="icon.jpg" alt="OIC" class="h-9 w-9 rounded-full object-cover" />
+                    <div>
+                        <div class="font-bold text-sm text-dark-text">oic.nccu</div>
+                        <div class="text-xs text-ig-light-secondary">政大國際合作事務處</div>
+                    </div>
+                </div>
+                <!-- "更多" 按鈕 --><i data-lucide="more-horizontal" class="h-5 w-5 text-dark-text"></i>
+            </header>
+
+            <!-- 2. Instagram 輪播貼文 (Carousel) - **調整為 4:5 比例** --><div class="relative w-full h-[470px] overflow-hidden" id="carousel-container"> <!-- 模擬 1080x1350 的高度 --><!-- 輪播軌道 --><div class="flex transition-transform duration-300 ease-in-out h-full" id="carousel-track">
+                    
+                    <!-- Slide 1: 封面 (The Hook) - 官方 CI 版 --><div class="w-full flex-shrink-0 relative bg-base-bg text-dark-text p-8 flex flex-col justify-center items-center text-center h-full">
+                        <span class="text-sm font-semibold text-ig-light-secondary">NCCU OIC USER GUIDE</span>
+                        <h1 class="font-serif text-3xl md:text-4xl my-6 leading-tight">
+                            國合處 OIC<br>到底在幹麻？
+                        </h1>
+                        <p class="mt-2 text-lg font-light text-ig-light-secondary">What does OIC actually do?</p>
+                        
+                        <!-- Swipe Hint --><div class="absolute bottom-10 inset-x-0 flex justify-center items-center space-x-2 text-ig-light-secondary">
+                            <i data-lucide="chevrons-right" class="h-4 w-4 animate-pulse"></i>
+                            <span class="text-xs font-semibold">SWIPE FOR MORE</span>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: 給台灣學生 (For Locals) - 藍色系 (縮減間距以適應 4:5 比例) --><div class="w-full flex-shrink-0 relative bg-oic-blue text-white p-6 flex flex-col justify-center h-full">
+                        <span class="font-semibold text-sm text-white/70 mb-2">FOR NCCU Students</span>
+                        <h2 class="font-serif text-3xl md:text-4xl mb-4">想飛出去？<br>找我們。</h2>
+                        <div class="space-y-3">
+                            <div class="bg-white p-3 rounded-xl flex items-center">
+                                <i data-lucide="plane-takeoff" class="h-6 w-6 mr-3 text-oic-blue"></i>
+                                <div class="text-dark-text">
+                                    <strong class="font-bold text-gray-800">出國交換</strong>
+                                    <p class="text-sm text-gray-600">500+ 姊妹校，我們罩你完成複雜申請</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl flex items-center">
+                                <i data-lucide="dollar-sign" class="h-6 w-6 mr-3 text-oic-blue"></i>
+                                <div class="text-dark-text">
+                                    <strong class="font-bold text-gray-800">別讓錢綁住你的夢想！</strong>
+                                    <p class="text-sm text-gray-600">申請獎學金 / 常見問題彙整</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl flex items-center">
+                                <i data-lucide="globe-2" class="h-6 w-6 mr-3 text-oic-blue"></i>
+                                <div class="text-dark-text">
+                                    <strong class="font-bold text-gray-800">不出國也能練英文/交朋友</strong>
+                                    <p class="text-sm text-gray-600">接待志工 / 語言桌 / Buddy計畫</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: 給外籍學生 (For Internationals) - 紅色系 (縮減間距以適應 4:5 比例) --><div class="w-full flex-shrink-0 relative bg-oic-red text-white p-6 flex flex-col justify-center h-full">
+                        <span class="font-semibold text-sm text-white/70 mb-2">FOR INTERNATIONALS</span>
+                        <h2 class="font-serif text-3xl md:text-4xl mb-4">Need help?<br>We got you.</h2>
+                        <div class="space-y-3">
+                            <div class="bg-white p-3 rounded-xl flex items-center">
+                                <i data-lucide="contact" class="h-6 w-6 mr-3 text-oic-red"></i>
+                                <div class="text-dark-text">
+                                    <strong class="font-bold text-gray-800">Visa & ARC</strong>
+                                    <p class="text-sm text-gray-600">The paperwork nightmare ends here.</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl flex items-center">
+                                <i data-lucide="home" class="h-6 w-6 mr-3 text-oic-red"></i>
+                                <div class="text-dark-text">
+                                    <strong class="font-bold text-gray-800">Living Support</strong>
+                                    <p class="text-sm text-gray-600">Dorms, bank accounts, and survival tips.</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl flex items-center">
+                                <i data-lucide="users" class="h-6 w-6 mr-3 text-oic-red"></i>
+                                <div class="text-dark-text">
+                                    <strong class="font-bold text-gray-800">Buddy Program</strong>
+                                    <p class="text-sm text-gray-600">Meet local friends who actually want to hang out</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: 共同交集 (Intersection) (縮減間距以適應 4:5 比例) --><div class="w-full flex-shrink-0 relative bg-base-bg text-dark-text p-6 flex flex-col justify-center items-center text-center h-full">
+                        <h2 class="font-serif text-3xl md:text-4xl mb-3">We Connect the World & NCCU.</h2>
+                        <p class="mt-2 text-lg text-ig-light-secondary">這裡是政大與世界的轉運站</p>
+                        <div class="mt-5 space-y-3 text-left text-base w-full">
+                            <div class="border border-gray-300 p-3 rounded-xl">
+                                <p><span class="mr-2">🎉</span> <strong>study abroad week</strong> (海外留學)</p>
+                            </div>
+                            <div class="border border-gray-300 p-3 rounded-xl">
+                                <p><span class="mr-2">🗣️</span> <strong>Language Exchange</strong> (語言交換)</p>
+                            </div>
+                            <div class="border border-gray-300 p-3 rounded-xl">
+                                <p><span class="mr-2">📍</span> <strong>Admin Bldg. 8F</strong> (行政大樓 8 樓)</p>
+                            </div>
+                        </div>
+                    </div>
+
+              <!-- Slide 5: 行動呼籲 (CTA) - 已加入收藏提示 --><div class="w-full flex-shrink-0 relative bg-gradient-to-br from-oic-blue to-oic-red text-white p-8 flex flex-col justify-center items-center text-center h-full">
+                    <span class="text-sm font-semibold text-white/70">CALL TO ACTION</span>
+                    <h2 class="font-serif text-3xl md:text-4xl my-6 leading-tight">想知道更多?<br>留言「OIC」<br>我們私訊給你<span class="whitespace-nowrap">懶人包</span></h2>
+                    <p class="mt-2 text-lg font-light text-white/80">want to know more ?<br>comment "OIC" for a cheat sheet!</p>
+                    
+                    <!-- 新增的收藏提示 -->
+                    <p class="mt-6 text-sm font-light text-white/70">
+                        P.S. 
+                        記得收藏這篇，下次申請才不會找不到！<br>
+                        (P.S. Save this post so you can find it later!)
+                    </p>
+                </div>
+                
+            </div>
+
+                <!-- 左右控制按鈕 --><button id="prevBtn" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/50 text-dark-text rounded-full p-1 opacity-80 hover:opacity-100 hidden">
+                    <i data-lucide="chevron-left" class="h-5 w-5"></i>
+                </button>
+                <button id="nextBtn" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/50 text-dark-text rounded-full p-1 opacity-80 hover:opacity-100">
+                    <i data-lucide="chevron-right" class="h-5 w-5"></i>
+                </button>
+
+                <!-- 輪播點 (Dots) --><div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-1.5" id="dots-container">
+                    <!-- Dots will be generated by JS --></div>
+            </div>
+
+            <!-- 3. Instagram 按鈕列 (Actions) --><div class="flex justify-between p-3">
+                <div class="flex space-x-4">
+                    <i data-lucide="heart" class="h-6 w-6 text-dark-text cursor-pointer hover:text-ig-light-secondary"></i>
+                    <i data-lucide="message-circle" class="h-6 w-6 text-dark-text cursor-pointer hover:text-ig-light-secondary"></i>
+                    <i data-lucide="send" class="h-6 w-6 text-dark-text cursor-pointer hover:text-ig-light-secondary"></i>
+                </div>
+                <div>
+                    <i data-lucide="bookmark" class="h-6 w-6 text-dark-text cursor-pointer hover:text-ig-light-secondary"></i>
+                </div>
+            </div>
+
+            <!-- 4. Instagram 讚數與內文 (Caption) --><div class="px-3 pb-2 text-sm">
+                <div class="font-bold text-dark-text">1,024 likes</div>
+                <div class="mt-1 text-dark-text">
+                    <span class="font-bold cursor-pointer">oic.nccu</span>
+                    <!-- 內文 (Caption) - 顯示完整內容 --><span class="break-words">
+                        OIC 到底在幹麻？一篇文幫你搞懂！<br><br>
+                        【給 #政大學生】<br>
+                        想 #出國交換？這裡有全球 500+ 姊妹校的 #交換學生 計畫，還有 #政大獎學金 (申其/學術卓越) 申請資訊。想留在台灣？來參加 #國際活動 或當接待志工！<br><br>
+                        【For #InternationalStudents】<br>
+                        Welcome to NCCU! We help with your #Visa & #ARC, #NCCUDorm, and bank accounts. Join the #BuddyProgram to meet local friends!<br>
+                        #政大國合處 #StudyinTaiwan #NCCUExchange #政大
+                    </span>
+                    <!-- 移除 "more" 按鈕 --></div>
+            </div>
+
+            <!-- 5. Instagram 留言 (Comments) --><div class="px-3 pb-4 text-sm">
+                <div class="text-ig-light-secondary cursor-pointer">View all 15 comments</div>
+                <div class="flex items-center space-x-2 mt-2">
+                    <div class="h-6 w-6 rounded-full bg-gray-200"></div>
+                    <input type="text" placeholder="Add a comment..." class="bg-transparent text-ig-light-secondary placeholder-ig-light-secondary text-sm outline-none w-full">
+                </div>
+            </div>
+        </div>
+
+        <!-- 將 Lucide Icons script 移到 body 結尾, 內聯 script 之前 -->
+        <script src="https://unpkg.com/lucide-icons"></script>
+        <script>
+            // 等待所有資源 (包括字體和腳本) 都載入後再執行
+            window.onload = () => {
+                // 啟動 Lucide Icons
+                try {
+                    lucide.createIcons();
+                } catch (e) {
+                    console.error("Error creating lucide icons:", e);
+                }
+
+                // 輪播 (Carousel) JS
+                const track = document.getElementById('carousel-track');
+                const container = document.getElementById('carousel-container');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const dotsContainer = document.getElementById('dots-container');
+
+                if (track && container && prevBtn && nextBtn && dotsContainer) {
+                    const slides = Array.from(track.children);
+                    const slideCount = slides.length;
+                    let currentSlide = 0;
+
+                    // 動態生成 Dots
+                    for (let i = 0; i < slideCount; i++) {
+                        const dot = document.createElement('div');
+                        dot.classList.add('h-1.5', 'w-1.5', 'rounded-full', 'transition-all');
+                        // 配合淺色背景，dot 顏色調整
+                        dot.classList.add(i === 0 ? 'bg-dark-text' : 'bg-gray-400', 'opacity-80');
+                        dot.dataset.index = i;
+                        dotsContainer.appendChild(dot);
+                    }
+
+                    const dots = Array.from(dotsContainer.children);
+
+                    // 更新按鈕和 Dots 的狀態
+                    const updateControls = () => {
+                        prevBtn.classList.toggle('hidden', currentSlide === 0);
+                        nextBtn.classList.toggle('hidden', currentSlide === slideCount - 1);
+
+                        dots.forEach((dot, index) => {
+                            dot.classList.toggle('bg-dark-text', index === currentSlide);
+                            dot.classList.toggle('bg-gray-400', index !== currentSlide);
+                        });
+                    };
+
+                    // 移動 Slide
+                    const moveToSlide = (index) => {
+                        if (index < 0 || index >= slideCount) return;
+                        track.style.transform = `translateX(-${index * 100}%)`;
+                        currentSlide = index;
+                        updateControls();
+                    };
+
+                    // 綁定事件
+                    nextBtn.addEventListener('click', () => moveToSlide(currentSlide + 1));
+                    prevBtn.addEventListener('click', () => moveToSlide(currentSlide - 1));
+                    dotsContainer.addEventListener('click', (e) => {
+                        const targetDot = e.target.closest('div[data-index]');
+                        if (!targetDot) return;
+                        moveToSlide(parseInt(targetDot.dataset.index));
+                    });
+
+                    // 初始化
+                    updateControls();
+                } else {
+                    console.error("Carousel elements not found.");
+                }
+
+                // 移除 內文 "more" 按鈕的 JS 邏輯
+                /*
+                const caption = document.getElementById('caption-text');
+                const moreBtn = document.getElementById('more-btn');
+                if (caption && moreBtn) {
+                    // 修正拼字錯誤
+                    caption.classList.add('whitespace-nowrap', 'overflow-hidden', 'text-ellipsis', 'block');
+                    
+                    moreBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        caption.classList.remove('whitespace-nowrap', 'overflow-hidden', 'text-ellipsis');
+                        moreBtn.classList.add('hidden');
+                    });
+                }
+                */
+            };
+        </script>
+    </body>
+    </html>
